@@ -13,10 +13,17 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
           
+          
       - name: Configure AWS CLI or SDK
         run: |
-         echo ACCESS_KEY=${{ secrets.AWS_ACCESS_KEY_ID }}" >> $GITHUB_ENV
-         echo "SECRETS_KEY=${{ secrets.AWS_SECRET_ACCESS_KEY }}" >> $GITHUB_ENV
+          aws configure set aws_access_key_id ${{ secrets.ACCESS_KEY }}
+          aws configure set aws_secret_access_key ${{ secrets.SECRET_KEY }}
+          aws configure set default.region eu-north-1
+          
+      - name: Configure AWS CLI
+        run: |
+         echo "ACCESS_KEY=${{ secrets.ACCESS_KEY_ID }}" >> $GITHUB_ENV
+         echo "SECRETS_KEY=${{ secrets.SECRET_KEY }}" >> $GITHUB_ENV
          echo "AWS_DEFAULT_REGION=eu-north-1" 
 
       - name: Install confd
@@ -24,13 +31,6 @@ jobs:
          wget https://github.com/kelseyhightower/confd/releases/download/v0.16.0/confd-0.16.0-linux-amd64
          chmod +x confd-0.16.0-linux-amd64
          sudo mv confd-0.16.0-linux-amd64 /usr/local/bin/confd
-
-          
-      - name: Configure AWS CLI or SDK
-        run: |
-          aws configure set aws_access_key_id ${{ secrets.ACCESS_KEY }}
-          aws configure set aws_secret_access_key ${{ secrets.SECRET_KEY }}
-          aws configure set default.region eu-north-1
 
       - name: Generate configuration file
         run: |
