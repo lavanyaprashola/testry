@@ -27,5 +27,5 @@ jobs:
                fi
       - name: Checkout repository
         run: |
-             echo $NAME
+             echo "$NAME"
    
