@@ -1,6 +1,9 @@
 [backend]
-name = "paramstore"
+type = "paramstore"
 prefix = "/myapp"
+region = "your-aws-region"
+access_key = "{{ getenv `ACCESS_KEY` }}"
+secret_key = "{{ getenv `SECRET_KEY` }}"
 
 [template]
 src = "templates/config.php.tmpl"
