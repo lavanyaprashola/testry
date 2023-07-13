@@ -1,31 +1,17 @@
 name: Upload to S3 and Invalidate CloudFront
 
-on:
-   workflow_dispatch:  
-      inputs:
-        environment:
-           description: 'Environment'
-           required: true
-           default: 'dev'
+on :
+  push:
+    branches:
+      - main
 jobs:
-   Artifacts_copy:
+  build:
     runs-on: ubuntu-latest
-    
-
+    env:
+      CONFIG_VARIABLE: ${{ env.CONFIG_VARIABLE_BASE }}
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v2
+      - name: Use environment variables
+        run: |
+          echo $CONFIG_VARIABLE
 
-      - name: Load environment variables
-        run: |
-              if [ "${{ inputs.environment }}" == "dev" ]; then
-                 echo "Loading dev environment variables"
-                
-               else
-                  echo "Environment not specified or unsupported"
-                  exit 1
-               fi
-      - name: Checkout repository
-        run: |
-             echo "$NAME"
-   
+
