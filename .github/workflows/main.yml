@@ -1,23 +1,31 @@
-name: Confd Parameter Store
+name: Upload to S3 and Invalidate CloudFront
 
 on:
-  push:
-    branches:
-      - main
-      
-
+   workflow_dispatch:  
+      inputs:
+        environment:
+           description: 'Environment'
+           required: true
+           default: 'dev'
 jobs:
-  build:
-      runs-on: ubuntu-latest
-  using-environments :
-       runs-on: ubuntu-latest
-       environment:
-           name : dev
-       steps:
-         - name: Checkout repository
-           uses: actions/checkout@v2
-          
-         - name: Clone
-           run: echo ${{ secrets.NAME }}
-                
-          
+   Artifacts_copy:
+    runs-on: ubuntu-latest
+    
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Load environment variables
+        run: |
+              if [ "${{ inputs.environment }}" == "dev" ]; then
+                 echo "Loading dev environment variables"
+                 set -a && source dev.env && set +a
+               else
+                  echo "Environment not specified or unsupported"
+                  exit 1
+               fi
+      - name: Checkout repository
+        run: |
+             echo $NAME
+   
