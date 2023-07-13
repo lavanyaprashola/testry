@@ -34,7 +34,7 @@ jobs:
 
       - name: Generate configuration file
         run: |
-          confd -confdir ./confd -onetime -backend paramstore
+          confd -confdir ./confd -onetime -backend ssm
 
       - name: Commit and push changes
         run: |
