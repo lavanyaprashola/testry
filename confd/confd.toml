@@ -1,0 +1,13 @@
+backend = "paramstore"
+prefix = "/myapp"
+
+[template]
+src = "templates/config.php.tmpl"
+dest = "config.php"
+keys = [
+  "/database/host",
+  "/database/port",
+  "/database/username",
+  "/database/password"
+]
+ 
