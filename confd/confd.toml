@@ -1,5 +1,5 @@
 [backend]
-name = "paramstore"
+name = "ssm"
 prefix = "/myapp"
 
 [template]
