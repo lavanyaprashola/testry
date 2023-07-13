@@ -13,11 +13,12 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: Install dependencies
+      - name: Install confd
         run: |
-          curl -L https://github.com/kelseyhightower/confd/releases/download/v0.16.0/confd-0.16.0-linux-amd64 -o /usr/local/bin/confd
-          chmod +x /usr/local/bin/confd
-          confd --version
+         wget https://github.com/kelseyhightower/confd/releases/download/v0.16.0/confd-0.16.0-linux-amd64
+         chmod +x confd-0.16.0-linux-amd64
+         sudo mv confd-0.16.0-linux-amd64 /usr/local/bin/confd
+
           
       - name: Configure AWS CLI or SDK
         run: |
