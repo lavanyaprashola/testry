@@ -20,7 +20,7 @@ jobs:
         run: |
               if [ "${{ inputs.environment }}" == "dev" ]; then
                  echo "Loading dev environment variables"
-                 set -a && source /home/runner/work/_temp/dev.env && set +a
+                
                else
                   echo "Environment not specified or unsupported"
                   exit 1
