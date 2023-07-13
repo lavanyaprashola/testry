@@ -1,4 +1,5 @@
-backend = "paramstore"
+[backend]
+name = "paramstore"
 prefix = "/myapp"
 
 [template]
